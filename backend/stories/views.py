@@ -1,7 +1,5 @@
 from django.urls import path, include
 from rest_framework import routers, serializers, viewsets
-from rest_framework.decorators import action
-from rest_framework.response import Response
 from .models import Story, Page
 
 class PageSerializer(serializers.ModelSerializer):

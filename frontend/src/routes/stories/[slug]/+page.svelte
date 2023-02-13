@@ -1,7 +1,9 @@
 <script>
 	import FullStory from "$lib/FullStory.svelte";
+
   export let data;
+  let story = data.story;
+
 </script>
 
-<!-- markup goes here -->
-<FullStory title={data.story.title} pages={data.story.pages} />
+<FullStory {story} />

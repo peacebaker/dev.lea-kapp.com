@@ -1,7 +1,4 @@
-# django imports
 from django.db import models
-
-# third party imports
 from ckeditor.fields import RichTextField
 
 # A story, made of multiple pages.
