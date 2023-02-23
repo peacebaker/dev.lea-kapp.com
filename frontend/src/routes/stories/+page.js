@@ -1,5 +1,7 @@
-export async function load({ fetch, params }) {
-  const res = await fetch(`http://127.0.0.1:8000/api/stories`);
+import { API_URL } from "$lib/globals.js"
+
+export async function load({ fetch }) {
+  const res = await fetch(`${API_URL}/stories`);
   const stories = await res.json();
   return { stories };
 }
