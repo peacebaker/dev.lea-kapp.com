@@ -1,14 +1,13 @@
 <script>
+  // import a few svelte functions
+  import { onMount } from "svelte";
   import { page } from "$app/stores";
   import { goto } from "$app/navigation";
 
-  let y;
-  let maxY;
-  let navOffset;
-  $: navOffset = (maxY-80)/2
-
+  // declaring data automagically populates it with the contents of the load function from +page.js
   export let data;
 
+  // 
   let title = data.story.title;
   let pages = data.story.pages;
 
@@ -26,7 +25,6 @@
   if ( pageNum != null) {
     curPage = pages[pageNum];
   }
-  
 
   // change to the selected page
   function setPage(num) {
@@ -44,54 +42,32 @@
     goto(`?${$page.url.searchParams.toString()}`);
   }
 
-  // changes curPage to the previous page
-  function prevPage() {
-    let newPage = curPage.page_num - 1;
-    if (newPage < 0) {
-      alert("How did you get here? $lib/FullStory > prevPage");
+  // table of contents button text
+  function getSubtitle(num) {
+    if (num == 0) {
+      return "Summary";
     } else {
-      setPage(newPage);
+      return `Page ${num}`;
     }
   }
 
-  // changes curPage to the next page
-  function nextPage() {
-    let newPage = curPage.page_num + 1;
-    if (newPage == pages.length) {
-      alert("How did you get here? $lib/FullStory > nextPage");
-    } else {
-      setPage(newPage);
-    }
-  }
+  // finally, declare variables that will shift with the state
+  let subtitle;
+  $: subtitle = getSubtitle(curPage.page_num)
 </script>
-
-<svelte:window bind:scrollY={y} bind:innerHeight={maxY} />
 
 <!-- page begins -->
 <div class="columns">
-
-  <!-- show prev page -->
-  {#if curPage.page_num != 0}
-    <div class="column is-1 is-offset-2 level">
-      <div class="level-item">
-        <button class="button nav-button is-size-4 has-background-black" style="top: {navOffset}px;"
-        on:click={prevPage}>&lt;</button>
-      </div>
-    </div>
-  {:else}
-  	<div class="column is-3"></div>
-  {/if}
+  <div class="column is-2"></div>
 
   <!-- display page -->
-  <div class="column is-6 has-background-black">
+  <div class="column is-8 has-background-black">
     <hr>
-    <h1 class="title has-text-centered">{title}</h1>
+    <h1 class="title has-text-centered">
+      {title}
+    </h1>
     <h2 class="subtitle has-text-centered">
-      {#if curPage.page_num == 0}
-        Summary
-      {:else}
-        Page {curPage.page_num}
-      {/if}
+      {subtitle}
     </h2>
     <hr>
     <div class="story-content">
@@ -100,41 +76,49 @@
     <hr>
 
     <!-- table of contents -->
-    <h2 class="subtitle has-text-centered">
+    <h2 class="subtitle has-text-centered" id="ToC">
       Table of Contents
     </h2>
     <hr>
-    <div class="columns is-multiline">
+    <div class="columns is-multiline is-mobile is-centered">
       {#each pages as page}
-      <div class="column is-3 has-text-centered">
-        <button class="button is-white is-outlined" on:click={() => setPage(page.page_num)}>
-          {#if page.page_num == 0}
-          Summary
+        <div class="column has-text-centered">
+          {#if page.page_num == curPage.page_num}
+            <button class="button is-white is-outlined" disabled>
+              {subtitle}
+            </button>
           {:else}
-          Page {page.page_num}
+            <button class="button is-white is-outlined" on:click={() => setPage(page.page_num)}>
+              {getSubtitle(page.page_num)}
+            </button>
           {/if}
-        </button>
-      </div>
+        </div>
       {/each}
     </div>
   </div>
 
-  <!-- show next page -->
-  {#if curPage.page_num+1 < pages.length }
-    <div class="column is-1 level">
-      <div class="level-item">
-        <button class="button nav-button is-size-4 title has-background-black" style="top: {navOffset}px;"
-        on:click={nextPage}>&gt;</button>
-      </div>
-    </div>
-  {/if}
+  <div class="column is-3 is-hidden-mobile">
+    <a href="#">
+      <button class="button goto-top title has-background-black">&uarr;</button>
+    </a>
+    <a href="#ToC">
+      <button class="button goto-bottom title has-background-black">&darr;</button>
+    </a>
+  </div>
 </div>
 
 <style>
   .story-content {
     text-indent: 3em;
   }
-  .nav-button {
+  .goto-top {
     position: fixed;
+    top: 2em;
+    right: .5em;
+  }
+  .goto-bottom {
+    position: fixed;
+    bottom: .5em;
+    right: .5em;
   }
 </style>

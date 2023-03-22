@@ -3,7 +3,7 @@
 </script>
 
 <div class="columns">
-  <div class="column is-6 is-offset-3 has-background-black pb-0">
+  <div class="column is-8 is-offset-2 has-background-black pb-0">
     <hr>
     <h1 class="title has-text-centered">Short Stories</h1>
     <hr>
@@ -12,7 +12,8 @@
 
 {#each data.stories as story, index}
 <div class="columns">
-  <div class="column is-6 is-offset-3 has-background-black py-0">
+  <div class="column is-8 is-offset-2 has-background-black py-0">
+    
     <!-- story title -->
     <h1 class="title is-4">
       <a href="/stories/{story.slug}">
