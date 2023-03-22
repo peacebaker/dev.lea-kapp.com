@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'stories.apps.StoriesConfig',
+    'news.apps.NewsConfig',
     
     'rest_framework',
     'corsheaders',
