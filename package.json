@@ -25,5 +25,10 @@
 		"vite": "^4.4.2",
 		"vitest": "^0.32.2"
 	},
-	"type": "module"
+	"type": "module",
+	"dependencies": {
+		"@fontsource/open-sans": "^5.0.9",
+		"@fontsource/poiret-one": "^5.0.8",
+		"normalize.css": "^8.0.1"
+	}
 }
