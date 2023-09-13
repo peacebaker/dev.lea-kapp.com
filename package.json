@@ -29,6 +29,8 @@
 	"dependencies": {
 		"@fontsource/open-sans": "^5.0.9",
 		"@fontsource/poiret-one": "^5.0.8",
+		"argon2": "^0.31.0",
+		"mongodb": "^6.0.0",
 		"normalize.css": "^8.0.1"
 	}
 }
