@@ -1,13 +1,15 @@
-import { MongoClient } from "mongodb";
-import { verify } from "argon2";
-import { redirect } from "@sveltejs/kit";
+import {uri} from "$lib/config.js";
 
-const uri = "mongodb://localhost:27017";
+import {redirect} from "@sveltejs/kit";
+import {MongoClient} from "mongodb";
+import {verify} from "argon2";
 
 export async function load({cookies}) {
 
   // connect to local MongoDB instance
   const client = new MongoClient(uri);
+
+  // check current cookies
   const username = cookies.get('username');
   const token = cookies.get('token');
 
@@ -21,7 +23,7 @@ export async function load({cookies}) {
     // try to find the session in Mongo
     const db = client.db("leaKapp");
     const sessions = db.collection('sessions');
-    const query = { user: username, token: token }
+    const query = { user: username, token: token };
     const session = await sessions.findOne(query);
 
     // if no session is found, display the login page
@@ -31,11 +33,11 @@ export async function load({cookies}) {
 
     // if the user is already logged in, take them to stories
     } else {
-      throw redirect(307, "/butt/stories")
+      throw redirect(307, "/butt/stories");
     }
 
   } finally {
-    await client.close()
+    await client.close();
   }
 }
 
@@ -59,17 +61,17 @@ export const actions = {
       const user = await users.findOne(query);
 
       // verify the password
-      const result = await verify(user.hash, password)
+      const result = await verify(user.hash, password);
       if (result) {
 
         // generate the session id and stash it in our db
-        const token = crypto.randomUUID()
+        const token = crypto.randomUUID();
         const sessions = db.collection('sessions');
-        await sessions.insertOne({ user: username, token: token})
+        await sessions.insertOne({ user: username, token: token});
 
         // set cookies and redirect
-        cookies.set('username', username, {path: '/', sameSite: true})
-        cookies.set('token', token, {path: '/', sameSite: true})
+        cookies.set('username', username, {path: '/', sameSite: true});
+        cookies.set('token', token, {path: '/', sameSite: true});
         throw redirect(303, '/butt/stories');
 
       } else {
@@ -80,7 +82,7 @@ export const actions = {
 
     // close the db connection
     } finally {
-      await client.close()
+      await client.close();
     }
   }
 }
