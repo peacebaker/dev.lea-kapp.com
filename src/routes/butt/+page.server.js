@@ -1,4 +1,4 @@
-import {uri} from "$lib/config.js";
+import {uri, dbname} from "$lib/config.js";
 
 import {redirect} from "@sveltejs/kit";
 import {MongoClient} from "mongodb";
@@ -21,7 +21,7 @@ export async function load({cookies}) {
   try {
 
     // try to find the session in Mongo
-    const db = client.db("leaKapp");
+    const db = client.db(dbname);
     const sessions = db.collection('sessions');
     const query = { user: username, token: token };
     const session = await sessions.findOne(query);
@@ -68,6 +68,8 @@ export const actions = {
         const token = crypto.randomUUID();
         const sessions = db.collection('sessions');
         await sessions.insertOne({ user: username, token: token});
+
+        // TODO: implement some kinda session timeout
 
         // set cookies and redirect
         cookies.set('username', username, {path: '/', sameSite: true});
