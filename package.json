@@ -23,14 +23,18 @@
 		"prettier-plugin-svelte": "^2.10.1",
 		"svelte": "^4.0.5",
 		"vite": "^4.4.2",
+		"vite-plugin-static-copy": "^0.17.0",
 		"vitest": "^0.32.2"
 	},
 	"type": "module",
 	"dependencies": {
 		"@fontsource/open-sans": "^5.0.9",
 		"@fontsource/poiret-one": "^5.0.8",
+		"@tinymce/tinymce-svelte": "^1.0.1",
 		"argon2": "^0.31.0",
+		"lucide-svelte": "^0.290.0",
 		"mongodb": "^6.0.0",
-		"normalize.css": "^8.0.1"
+		"normalize.css": "^8.0.1",
+		"tinymce": "^6.7.2"
 	}
 }
