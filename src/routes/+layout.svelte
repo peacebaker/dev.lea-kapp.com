@@ -26,6 +26,7 @@
     font-family: "Poiret One";
     font-size: 6rem;
   }
+  
   :global(h2) {
     font-family: "Poiret One";
     font-size: 3rem;
