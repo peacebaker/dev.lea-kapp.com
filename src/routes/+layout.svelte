@@ -21,4 +21,13 @@
     color: var(--whitish);
     font-family: "Open Sans";
   }
+
+  :global(h1) {
+    font-family: "Poiret One";
+    font-size: 6rem;
+  }
+  :global(h2) {
+    font-family: "Poiret One";
+    font-size: 3rem;
+  }
 </style>
