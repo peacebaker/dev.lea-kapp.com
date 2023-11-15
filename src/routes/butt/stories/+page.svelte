@@ -30,26 +30,27 @@
 
 <style>
   h1 {
-    font-family: "Poiret One";
-    font-size: 96px;
     margin: 1rem;
   }
   h2 {
-    font-family: "Poiret One";
-    font-size: 48px;
+    margin: 2rem;
   }
   nav {
     font-family: "Poiret One";
-    font-size: 36px;
+    font-size: 2.5rem;
   }
 
   .topNav {
     display: flex;
     justify-content: space-between;
   }
+  .searchBox {
+    margin: 1rem;
+
+  }
   .searchBox input {
     font-family: "Open Sans";
-    font-size: 24px;
+    font-size: 1.5rem;
     color: var(--whitish);
     background-color: inherit;
     border: none;
@@ -58,7 +59,7 @@
   .tags {
     margin: 1rem;
   }
-  
+ 
   .storyBoard {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -67,7 +68,7 @@
   }
   .storyCard {
     background-color: var(--grayish);
-    border-radius: 24px;
+    border-radius: 1.5rem;
   }
   .storyCard h2 {
     text-align: center;
