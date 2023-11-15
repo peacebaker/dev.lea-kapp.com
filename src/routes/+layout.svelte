@@ -21,18 +21,18 @@
     color: var(--whitish);
     font-family: "Open Sans";
   }
-
+  
   :global(h1) {
     font-family: "Poiret One";
     font-size: 6rem;
     margin: 0;
   }
-  
   :global(h2) {
     font-family: "Poiret One";
     font-size: 3rem;
     margin: 0;
   }
+
   @keyframes link {
     0% {
       color: var(--whitish);

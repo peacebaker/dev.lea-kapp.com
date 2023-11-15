@@ -55,6 +55,6 @@
     align-items: center;
     background-color: var(--grayish);
     border-radius: 1.5rem;
-    padding: 0rem 3rem 1rem 3rem;
+    padding: 0rem 3rem 2rem 3rem;
   }
 </style>
