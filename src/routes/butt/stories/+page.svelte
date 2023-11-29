@@ -18,10 +18,20 @@
   </div>
 </nav>
 
-
-
-
 <div class="storyBoard">
+  {#each data.stories as story}
+  
+    <a href={`/butt/stories/${story.slug}`}>
+      <div class="storyCard">
+      
+        <h2>{story.title}</h2>
+      
+      {@html story.pages[0]}
+    </div>
+  </a>
+
+  {/each}
+
   <a href="/butt/stories/new" class="storyCard">
     <h2>New Story</h2>
   </a>
@@ -69,6 +79,7 @@
   .storyCard {
     background-color: var(--grayish);
     border-radius: 1.5rem;
+    padding: 1rem 1.5rem 2rem 1.5rem;
   }
   .storyCard h2 {
     text-align: center;
