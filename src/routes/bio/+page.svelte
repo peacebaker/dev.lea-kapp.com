@@ -5,28 +5,10 @@
 
   <div class="vertical">
     <h1>Lea Kapp</h1>
-    <a href="/bio" id="bioLink">About Me</a>
-
-    <div class="menuWrap">
-      <div class="menu">
-        <a href="/stories">
-          Author
-        </a>
+    <a href="/" id="bioLink">Menu</a>
     
-        <a href="https://github.com/peacebaker" target="_blank">
-          Developer
-        </a>
-      </div>
-      
-      <div class="menu">
-        <a href="/gallery">
-          Artist
-        </a>
-
-        <a href="/gallery">
-          Designer
-        </a>
-      </div>
+    <div class="bio">
+      <p>I swear: I'm a real person, not an AI.  I might be trapped inside the net, but I'm no Alt Cunningham.</p>
     </div>
   </div>
 
@@ -56,21 +38,15 @@
     font-size: 1.5rem;
     margin-top: 1rem;
   }
-  .menuWrap {
-    display: flex;
-    margin-top: 4rem;
-  }
-  .menu {
+  .bio {
     background-color: var(--grayish);
     border-radius: 16px;
-    margin: 0 2rem;
+    margin: 3rem 2rem;
     display: flex;
     flex-direction: column;
-    font-size: 48px;
-    font-family: "Poiret One";
-    text-align: center;
-    padding: 3rem;
-    gap: 4rem;
+    font-family: "Open Sans";
+    padding: 1rem 1.5rem 1rem 1.5rem;
+    max-width: 50%;
   }
   img {
     max-height: 100vh;
