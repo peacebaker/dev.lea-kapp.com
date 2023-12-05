@@ -3,6 +3,8 @@
   import {search, tagSearch} from '$lib/nav.js';
   import { gallery } from '$lib/gallery.js';
 
+  export let data;
+
   let showPics = gallery;
   let searchText = '';
   let searchTags = [];
@@ -17,6 +19,11 @@
     })
   })
 
+  // preload search tag if passed a query param
+  if (data.tag) {
+    ({ showItems: showPics, searchTags } = tagSearch(gallery, searchTags, data.tag))
+  }
+  
 </script>
 
 <nav>

@@ -19,11 +19,11 @@
       </div>
       
       <div class="menu">
-        <a href="/gallery">
+        <a href="/gallery?tag=art">
           Artist
         </a>
 
-        <a href="/gallery">
+        <a href="/gallery?tag=design">
           Designer
         </a>
       </div>
