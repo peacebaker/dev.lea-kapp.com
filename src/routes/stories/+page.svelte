@@ -1,59 +1,98 @@
 <script>
-  import Teaser from "$lib/Teaser.svelte";
+  import {search, tagSearch} from '$lib/nav.js';
   export let data;
+
+  let showStories = data.stories;
+  let searchText = "";
+  let searchTags = [];
+
+  let allTags = [];
+
 </script>
 
-<div class="top">
-  <h1>Stories</h1>
-  <div class="search">Search: <input /></div>
-</div>
+<nav>
+  <div class="topNav">
+    <h1><a href="/">&lt;</a> Stories</h1>
 
-<div class="tags">
-  <div class="tag-label">
-    Tags:
+    <div class="searchBox">
+      Search:
+      <input bind:value={searchText} on:input={() => {showStories = search(data.stories, searchText)}} />
+    </div>
+    
   </div>
-</div>
 
-<div class="teasers">
-  {#each data.stories as story}
-    <Teaser {...story} />
+  <div class="tags">
+    Tags:
+    {#each allTags as tag}
+      <button on:click={() => ({showItems: showStories, searchTags} = tagSearch(data.stories, searchTags, tag)) }
+        class:active={searchTags.includes(tag)}
+        class:inactive={!searchTags.includes(tag)}>
+        {tag}
+      </button>
+    {/each}
+  </div>
+</nav>
+
+<div class="storyBoard">
+  {#each showStories as story}
+
+    <a href={`/butt/stories/${story.slug}`}>
+      <div class="storyCard">
+        <h2>{story.title}</h2>  
+        {@html story.pages[0]}
+      </div>
+    </a>
+
   {/each}
 </div>
 
+
 <style>
-  .top {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    font-family: "Poiret One";
-  }
   h1 {
-    font-size: 96px;
-    margin: 16px;
+    margin: 1rem;
   }
-  .search {
-    font-size: 36px;
-    margin: 16px;
+  h2 {
+    margin: 2rem;
   }
-  input {
-    border: 0;
-    background-color: inherit;
-    border-bottom: 2px solid var(--primary);
+  nav {
+    font-family: "Poiret One";
+    font-size: 2.5rem;
+  }
+
+  .topNav {
+    display: flex;
+    justify-content: space-between;
+  }
+  .searchBox {
+    margin: 1rem;
+
+  }
+  .searchBox input {
+    font-family: "Open Sans";
+    font-size: 1.5rem;
     color: var(--whitish);
+    background-color: inherit;
+    border: none;
+    border-bottom: 1px solid var(--whitish);
   }
   .tags {
-    display: flex;
-    flex-direction: row;
+    margin: 1rem;
   }
-  .tag-label {
-    font-family: "Poiret One";
-    font-size: 36px;
-    margin: 0 0 16px 16px;
+ 
+  .storyBoard {
+    column-count: 3;
+    column-gap: 1rem;
+    margin: 1rem;
   }
-  .teasers {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr)
+  .storyCard {
+    background-color: var(--grayish);
+    border-radius: 1.5rem;
+    padding: 1rem 1.5rem 2rem 1.5rem;
+    break-inside: avoid;
+    margin-bottom: 1rem;
   }
-  
+  .storyCard h2 {
+    text-align: center;
+  }
   
 </style>
