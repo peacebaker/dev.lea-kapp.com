@@ -110,6 +110,7 @@
   .galleryBoard {
     column-count: 3;
     column-gap: 1rem;
+    margin: 1rem;
   }
   .galleryCard {
     background-color: var(--grayish);
