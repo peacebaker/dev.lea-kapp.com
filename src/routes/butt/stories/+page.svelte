@@ -4,7 +4,7 @@
 
 <nav>
   <div class="topNav">
-    <h1>Stories</h1>
+    <h1><a href="/butt/menu">&lt;</a> Stories</h1>
 
     <div class="searchBox">
       Search:
