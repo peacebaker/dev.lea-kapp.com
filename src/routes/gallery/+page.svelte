@@ -1,5 +1,6 @@
 <script>
 
+  import {search, tagSearch} from '$lib/nav.js';
   import { gallery } from '$lib/gallery.js';
 
   let showPics = gallery;
@@ -16,42 +17,6 @@
     })
   })
 
-  // 
-  function search() {
-    showPics = "";
-    for (const pic of gallery) {
-      if (pic.title.toLowerCase().includes(searchText.toLowerCase())) {
-        showPics = [...showPics, pic];
-      }
-    }
-  }
-
-  //
-  function tagSearch(tag) {
-
-    // add the tag to the list if it's not there already
-    if (!searchTags.includes(tag)) {
-      searchTags = [...searchTags, tag]
-
-    // remove the tag from the list if it's already there
-    } else {
-      searchTags = [...searchTags.slice(0, searchTags.indexOf(tag)), ...searchTags.slice(searchTags.indexOf(tag)+1)]
-    }
-
-    // display all pictures matching the tags
-    showPics = [];
-    if (searchTags.length > 0) {
-      for (const pic of gallery) {
-        for (const searchTag of searchTags)
-          if (pic.tags.includes(searchTag)) {
-            showPics = [...showPics, pic];
-          }
-      } 
-    } else {
-      showPics = gallery;
-    }
-  }
-
 </script>
 
 <nav>
@@ -60,7 +25,7 @@
 
     <div class="searchBox">
       Search:
-      <input bind:value={searchText} on:input={() => search()} />
+      <input bind:value={searchText} on:input={() => {showPics = search(gallery, searchText)}} />
     </div>
     
   </div>
@@ -68,7 +33,7 @@
   <div class="tags">
     Tags:
     {#each allTags as tag}
-      <button on:click={() => tagSearch(tag)} 
+      <button on:click={() => ({ showItems: showPics, searchTags } = tagSearch(gallery, searchTags, tag))} 
         class:active={searchTags.includes(tag)}
         class:inactive={!searchTags.includes(tag)}>
         {tag}
