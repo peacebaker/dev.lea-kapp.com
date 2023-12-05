@@ -20,20 +20,20 @@
 
 <div class="storyBoard">
   {#each data.stories as story}
-  
+
     <a href={`/butt/stories/${story.slug}`}>
       <div class="storyCard">
-      
-        <h2>{story.title}</h2>
-      
-      {@html story.pages[0]}
-    </div>
-  </a>
+        <h2>{story.title}</h2>  
+        {@html story.pages[0]}
+      </div>
+    </a>
 
   {/each}
 
-  <a href="/butt/stories/new" class="storyCard">
-    <h2>New Story</h2>
+  <a href="/butt/stories/new">
+    <div  class="storyCard">
+      <h2>New Story</h2>
+    </div>
   </a>
 </div>
 
@@ -71,15 +71,16 @@
   }
  
   .storyBoard {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1rem;
+    column-count: 3;
+    column-gap: 1rem;
     margin: 1rem;
   }
   .storyCard {
     background-color: var(--grayish);
     border-radius: 1.5rem;
     padding: 1rem 1.5rem 2rem 1.5rem;
+    break-inside: avoid;
+    margin-bottom: 1rem;
   }
   .storyCard h2 {
     text-align: center;
