@@ -46,6 +46,9 @@
 </script>
 
 <main>
+
+  <!-- editable title and slug; warning: this might not be accessible? -->
+  <!-- using spans b/c inputs can't be easily resized based on text input-->
   <h1>
     <span role="textbox" tabindex="0" contenteditable bind:innerHTML={data.story.title} />
   </h1>
@@ -59,8 +62,7 @@
         transition:fade={{duration: 600}}
         on:click={() => switchPage(i)} 
         class:active={curPageNum == i} 
-        class:inactive={curPageNum != i}
-      >
+        class:inactive={curPageNum != i}>
         {i}
       </button>
     {/each}
