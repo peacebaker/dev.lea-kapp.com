@@ -76,6 +76,7 @@ export async function loadStory(slug) {
         slug: "new",
         title: "New",
         pages: [""],
+        tags: [],
       }
     }
 
@@ -109,6 +110,73 @@ export async function saveStory(story) {
 
   }
   finally {
+    await client.close();
+  }
+}
+
+export async function loadTags() {
+
+  const client = new MongoClient(uri);
+
+  try {
+
+    // connect to the db and collection
+    const db = client.db(dbname);
+    const collection = db.collection("storyTags");
+    const dbTags = await collection.find({}, skipID).toArray();
+
+    // since these documents only have one value, return an array of their values
+    const tags = dbTags.map(tag => tag.name);
+    return tags;
+
+  } finally {
+    await client.close();
+  }
+}
+
+export async function saveTag(tag) {
+  
+  const client = new MongoClient(uri);
+
+  try {
+    
+    // connect to the db and collection 
+    const db = client.db(dbname);
+    const collection = db.collection("storyTags");
+
+    // check and see if the tag already exists
+    const filter = {name: tag};
+    const oldTag = await collection.findOne(filter, skipID);
+
+    // TODO: throw an error if it exists
+    if (oldTag === null) {
+      await collection.insertOne(filter);
+    }
+  } finally {
+    await client.close();
+  }
+}
+
+export async function deleteTag(tag) {
+
+  const client = new MongoClient(uri);
+
+  try {
+    
+    // connect to the db and collection 
+    const db = client.db(dbname);
+    const tagCollection = db.collection("storyTags");
+    const storyCollection = db.collection("stories");
+
+    // delete the tag from any stories it's assigned to
+    const operation = {$pull: {tags: tag}}
+    await storyCollection.updateMany({}, operation);
+
+    // delete the tag from the tags collection
+    const filter = {name: tag};
+    await tagCollection.deleteOne(filter);
+
+  } finally {
     await client.close();
   }
 }

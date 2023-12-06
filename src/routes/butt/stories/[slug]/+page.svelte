@@ -12,6 +12,18 @@
     data.story.pages = [...data.story.pages, ""];
   }
 
+  // first test didn't include tags
+  if (!("tags" in data.story)) {
+    data.story.tags = [];
+  }
+  function toggleTag(tag) {
+    if (data.story.tags.includes(tag)) {
+      data.story.tags = [...data.story.tags.slice(0, data.story.tags.indexOf(tag)), ...data.story.tags.slice(data.story.tags.indexOf(tag)+1)]
+    } else {
+      data.story.tags = [...data.story.tags, tag]
+    }
+  }
+
   async function saveButton() {
 
     // new stories cannot be saved with the slug "new"
@@ -58,9 +70,8 @@
 
   <div class="pager" >
     {#each data.story.pages as page, i}
-      <button 
+      <button on:click={() => switchPage(i)} 
         transition:fade={{duration: 600}}
-        on:click={() => switchPage(i)} 
         class:active={curPageNum == i} 
         class:inactive={curPageNum != i}>
         {i}
@@ -69,11 +80,11 @@
     <button class="inactive" on:click={() => addPage()}>+</button>
   </div>
   
-  <div class="sectionContainer">
+  <div class="pageContainer">
     {#each data.story.pages as page, i}
       {#if curPageNum == i}
    
-        <section in:fly={{x: "50vw", duration: 600, delay: 300}} out:fly={{x: "-50vw", duration: 600}}>
+        <section class="page" in:fly={{x: "50vw", duration: 600, delay: 300}} out:fly={{x: "-50vw", duration: 600}}>
           <h2>
             {#if curPageNum === 0}
               Teaser
@@ -88,8 +99,20 @@
     {/each}
   </div>
 
-  <button on:click={() => saveButton()}>Save</button>
+  <div class="tags">
+    <h2>Tags</h2>
+    <div class="tagList">
+      {#each data.allTags as tag}
+        <button on:click={() => toggleTag(tag)}
+          class:active={data.story.tags.includes(tag)}
+          class:inactive={!data.story.tags.includes(tag)}>
+          {tag}
+        </button>
+      {/each}
+    </div>
+  </div>
 
+  <button on:click={() => saveButton()}>Save</button>
 </main>
 
 <style>
@@ -141,10 +164,10 @@
     cursor: pointer;
   }
 
-  .sectionContainer {
+  .pageContainer {
     display: grid;
   }
-  section {
+  .page {
     grid-area: 1/1/2/2;
     display: flex;
     flex-direction: column;
@@ -152,6 +175,22 @@
     background-color: var(--grayish);
     border-radius: 1.5rem;
     padding: 0rem 3rem 1.67rem 3rem;
+  }
+
+  .tags {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--grayish);
+    border-radius: 1.5rem;
+    padding: 0rem 3rem 1.67rem 3rem;
+    margin-top: 1rem;
+  }
+  .tagList {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
   }
 
   button {

@@ -1,7 +1,8 @@
-import {loadStory} from "$lib/db.js";
+import {loadStory, loadTags} from "$lib/db.js";
 
 
 export async function load({params}) {
   const story = await loadStory(params.slug);
-  return {story};
+  const allTags = await loadTags();
+  return {story, allTags};
 }
