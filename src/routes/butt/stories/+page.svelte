@@ -1,5 +1,13 @@
 <script>
+  import {search, tagSearch} from '$lib/nav.js';
   export let data;
+
+  let showStories = data.stories;
+  let searchText = "";
+  let searchTags = [];
+
+  let allTags = data.tags;
+  
 </script>
 
 <nav>
@@ -8,18 +16,25 @@
 
     <div class="searchBox">
       Search:
-      <input />
+      <input bind:value={searchText} on:input={() => {showStories = search(data.stories, searchText)}} />
     </div>
     
   </div>
 
   <div class="tags">
     Tags:
+    {#each allTags as tag}
+      <button on:click={() => ({showItems: showStories, searchTags} = tagSearch(data.stories, searchTags, tag)) }
+        class:active={searchTags.includes(tag)}
+        class:inactive={!searchTags.includes(tag)}>
+        {tag}
+      </button>
+    {/each}
   </div>
 </nav>
 
 <div class="storyBoard">
-  {#each data.stories as story}
+  {#each showStories as story}
 
     <a href={`/butt/stories/${story.slug}`}>
       <div class="storyCard">
@@ -68,6 +83,24 @@
   }
   .tags {
     margin: 1rem;
+    display: flex;
+  }
+  .tags button {
+    border: none;
+    border-radius: 8px;
+    font-size: 1.5rem;
+    color: var(--whitish);
+    padding: .6rem 1rem;
+    margin: 0 .5rem;
+    cursor: pointer;
+    font-family: "Open Sans";
+    font-size: 1rem;
+  }
+  .inactive {
+    background-color: var(--primary);
+  }
+  .active {
+    background-color: var(--secondary);
   }
  
   .storyBoard {

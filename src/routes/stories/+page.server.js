@@ -1,6 +1,7 @@
-import {loadStories} from '$lib/db.js';
+import {loadStories, loadTags} from '$lib/db.js';
 
 export async function load() {
   let stories = await loadStories();
-  return {stories};
+  let tags = await loadTags();
+  return {stories, tags};
 }

@@ -6,7 +6,7 @@
   let searchText = "";
   let searchTags = [];
 
-  let allTags = [];
+  let allTags = data.tags;
 
 </script>
 
@@ -77,6 +77,24 @@
   }
   .tags {
     margin: 1rem;
+    display: flex;
+  }
+  .tags button {
+    border: none;
+    border-radius: 8px;
+    font-size: 1.5rem;
+    color: var(--whitish);
+    padding: .6rem 1rem;
+    margin: 0 .5rem;
+    cursor: pointer;
+    font-family: "Open Sans";
+    font-size: 1rem;
+  }
+  .inactive {
+    background-color: var(--primary);
+  }
+  .active {
+    background-color: var(--secondary);
   }
  
   .storyBoard {
