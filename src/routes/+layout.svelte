@@ -55,4 +55,13 @@
   :global(a:active) {
     color: var(--secondary);
   }
+
+  @media screen and (max-width: 800px) {
+    :global(h1) {
+      font-size: 4rem;
+    }
+    :global(h2) {
+      font-size: 2rem;
+    }
+  }
 </style>

@@ -82,8 +82,9 @@
     border-bottom: 1px solid var(--whitish);
   }
   .tags {
-    margin: 1rem;
+    margin: 1rem 1rem 0 1rem;
     display: flex;
+    flex-wrap: wrap;
   }
   .tags button {
     border: none;
@@ -91,7 +92,7 @@
     font-size: 1.5rem;
     color: var(--whitish);
     padding: .6rem 1rem;
-    margin: 0 .5rem;
+    margin: 0 .5rem 1rem .5rem;
     cursor: pointer;
     font-family: "Open Sans";
     font-size: 1rem;
@@ -106,7 +107,7 @@
   .storyBoard {
     column-count: 3;
     column-gap: 1rem;
-    margin: 1rem;
+    margin: 0 1rem 1rem 1rem;
   }
   .storyCard {
     background-color: var(--grayish);
@@ -117,6 +118,27 @@
   }
   .storyCard h2 {
     text-align: center;
+  }
+
+  @media screen and (max-width: 1200px) {
+    .storyBoard {
+      column-count: 2;
+    }
+    
+  }
+  @media screen and (max-width: 900px) {
+    .topNav {
+      flex-direction: column;
+    }
+  }
+  @media screen and (max-width: 800px) {
+    .storyBoard {
+      column-count: 1;
+    }
+    nav {
+      font-family: "Poiret One";
+      font-size: 1.8rem;
+    }
   }
   
 </style>

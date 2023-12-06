@@ -48,8 +48,7 @@
   }
   h1 {
     font-family: "Poiret One";
-    font-size: 96px;
-    margin: 0;
+    margin: 3rem 0 0 0;
   }
   #bioLink {
     font-family: "Poiret One";
@@ -63,10 +62,10 @@
   .menu {
     background-color: var(--grayish);
     border-radius: 16px;
-    margin: 0 2rem;
+    margin: 0 2rem 3rem 2rem;
     display: flex;
     flex-direction: column;
-    font-size: 48px;
+    font-size: 3rem;
     font-family: "Poiret One";
     text-align: center;
     padding: 3rem;
@@ -74,5 +73,24 @@
   }
   img {
     max-height: 100vh;
+  }
+  @media screen and (max-width: 1300px) {
+    .horizontal {
+      flex-direction: column-reverse;
+    }
+    img {
+      max-height: 100%;
+      max-width: 100vw;
+    }
+  }
+  @media screen and (max-width: 700px) {
+    .menuWrap {
+      flex-direction: column;
+    }
+    .menu {
+      font-size: 2rem;
+      margin: 0 2rem 3rem 2rem;
+      gap: 3rem;
+    }
   }
 </style>

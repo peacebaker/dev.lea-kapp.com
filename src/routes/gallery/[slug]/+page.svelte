@@ -4,8 +4,6 @@
 
 <main>
 
-  <!-- editable title and slug; warning: this might not be accessible? -->
-  <!-- using spans b/c inputs can't be easily resized based on text input-->
   <h1>
     {data.curPic.title}
   </h1>
@@ -13,34 +11,35 @@
   <a class="returnLink" href="/gallery">Return to Gallery</a>
   
   <div class="sectionContainer">
-    
-  {#if data.prevPic}
-    <a href="/gallery/{data.prevPic.slug}">
-      <button>
-        &lt;
-      </button>
-    </a>
-  {/if}
 
-  <section >
-    <div class="description">
-      {@html data.curPic.description}
-    </div>
-  
-    <div>
-      <img src={data.curPic.filename} alt={data.curPic.alt}>
-    </div>
+    <section>
+      <div class="description">
+        {@html data.curPic.description}
+      </div>
     
-  </section>
-
-  {#if data.nextPic}
-    <a href="/gallery/{data.nextPic.slug}">
-      <button>
-        &gt;
-      </button>
-    </a>
-  {/if}
+      <div>
+        <img src={data.curPic.filename} alt={data.curPic.alt}>
+      </div>
+      
+    </section>
   
+  </div>
+
+  <div class="sectionContainer">
+    {#if data.prevPic}
+      <a href="/gallery/{data.prevPic.slug}">
+        <button>
+          &lt; Previous
+        </button>
+      </a>
+    {/if}
+    {#if data.nextPic}
+      <a href="/gallery/{data.nextPic.slug}">
+        <button>
+          Next &gt;
+        </button>
+      </a>
+    {/if}
   </div>
 
 </main>
@@ -53,7 +52,7 @@
     padding-bottom: 90vh;
   }
   h1 {
-    margin: 3rem 0 1rem 0;
+    margin: 3rem 1rem 1rem 1rem;
   }
   .slug {
     font-family: "Poiret One";
@@ -73,7 +72,7 @@
     align-items: center;
   }
   .sectionContainer a button{
-    font-size: 3rem;
+    font-size: 1rem;
   }
   section {
     display: flex;
@@ -82,7 +81,7 @@
     background-color: var(--grayish);
     border-radius: 1.5rem;
     padding: 1.67rem 3rem 1.67rem 3rem;
-    width: 40vw;
+    max-width: 760px;
     overflow: hidden;
     resize: both;
     box-sizing: border-box;
