@@ -2,6 +2,7 @@
 
   import {search, tagSearch} from '$lib/nav.js';
   import { gallery } from '$lib/gallery.js';
+	import { fade } from 'svelte/transition';
 
   export let data;
 
@@ -53,7 +54,7 @@
   {#each showPics as pic, i}
 
     <a href={`/gallery/${pic.slug}`}>
-      <div class="galleryCard">
+      <div transition:fade={{duration: 300}} class="galleryCard">
       
         <h2>{pic.title}</h2>
         <img src="gallery/{pic.filename}" alt="" />

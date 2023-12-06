@@ -1,5 +1,7 @@
 <script>
   import {search, tagSearch} from '$lib/nav.js';
+  import {fade} from 'svelte/transition';
+
   export let data;
 
   let showStories = data.stories;
@@ -37,7 +39,7 @@
   {#each showStories as story}
 
     <a href={`/stories/${story.slug}`}>
-      <div class="storyCard">
+      <div transition:fade={{duration: 300}} class="storyCard">
         <h2>{story.title}</h2>  
         {@html story.pages[0]}
       </div>
