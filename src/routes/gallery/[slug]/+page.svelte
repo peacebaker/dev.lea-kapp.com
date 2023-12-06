@@ -54,12 +54,6 @@
   h1 {
     margin: 3rem 1rem 1rem 1rem;
   }
-  .slug {
-    font-family: "Poiret One";
-  }
-  h2 {
-    margin: 2.5rem 0 1.67rem 0;
-  }
   .returnLink {
     font-family: "Poiret One";
     font-size: 1.5rem;
